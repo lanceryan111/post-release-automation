@@ -1,0 +1,19 @@
+default_platform(:ios)
+
+platform :ios do
+  desc "Upload dSYM to Dynatrace"
+  lane :upload_dynatrace_symbols do |options|
+    dynatrace_process_symbols(
+      dtxDssClientPath: options[:dtxDssClientPath],
+      appId: options[:appId],
+      apitoken: options[:apitoken],
+      os: options[:os] || "ios",
+      bundleName: options[:bundleName],
+      versionStr: options[:versionStr],
+      version: options[:version],
+      symbolIsFile: options[:symbolIsFile],
+      server: options[:server],
+      debugMode: options[:debugMode] || "false"
+    )
+  end
+end
